@@ -5,6 +5,10 @@ function M.path_exists(path)
    return vim.loop.fs_stat(path) and true or false
 end
 
+function M.relative_path(filepath, cwd)
+   return vim.fn.fnamemodify(filepath, ":~:." .. cwd .. ":.")
+end
+
 local jit_os
 
 if jit then

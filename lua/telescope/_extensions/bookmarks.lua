@@ -8,7 +8,8 @@ local pickers = require "telescope.pickers"
 local entry_display = require "telescope.pickers.entry_display"
 local conf = require("telescope.config").values
 local config = require("bookmarks.config").config
-local utils = require "telescope.utils"
+local t_utils = require "telescope.utils"
+local common_utils = require("bookmarks.util")
 
 local function get_text(annotation)
    local pref = string.sub(annotation, 1, 2)
@@ -44,7 +45,7 @@ local function bookmark(opts)
       return displayer {
          line_info,
          entry.text:gsub(".* | ", ""),
-         utils.path_smart(entry.filename), -- or path_tail
+         config.scope and common_utils.relative_path(entry.filename, vim.fn.getcwd()) or t_utils.path_smart(entry.filename), -- or path_tail
       }
    end
    pickers.new(opts, {
