@@ -45,7 +45,7 @@ local function bookmark(opts)
       return displayer {
          line_info,
          entry.text:gsub(".* | ", ""),
-         config.scope and common_utils.relative_path(entry.filename, vim.fn.getcwd()) or t_utils.path_smart(entry.filename), -- or path_tail
+         config.scoped and common_utils.relative_path(entry.filename, vim.fn.getcwd()) or t_utils.path_smart(entry.filename), -- or path_tail
       }
    end
    pickers.new(opts, {
